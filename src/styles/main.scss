@@ -1,3 +1,134 @@
+$base-font-size: 30px;
+$cell-size: 100px;
+$cell-gap: 1px;
+$callenar-width: $cell-gap + 7 * ($cell-size + $cell-gap);
+$cell-color: #eee;
+$cell-hover-color: #ffc0cb;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: $base-font-size;
+}
+
 body {
   margin: 0;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: inherit;
+  flex-flow: row wrap;
+  width: $callenar-width;
+  padding-left: $cell-gap;
+
+  &__cell {
+    position: relative;
+    max-width: $cell-size;
+    width: 100%;
+    height: $cell-size;
+    margin-right: $cell-gap;
+    margin-bottom: $cell-gap;
+    background-color: $cell-color;
+    border: 1px solid;
+    transition: all 0.5s linear;
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: $cell-hover-color;
+    transform: translate(0, -20px);
+  }
+
+  &__cell::after {
+    content: "";
+    display: inherit;
+    width: 100%;
+    text-align: center;
+    line-height: $cell-size;
+  }
+
+  @for $i from 1 through 31 {
+    &__cell:nth-child(#{$i})::after {
+      content: "#{$i * 1}";
+    }
+  }
+}
+
+.calendar-mon {
+  .calendar__cell:nth-child(1) {
+    margin-left: 0;
+  }
+}
+
+.calendar-tue {
+  .calendar__cell:nth-child(1) {
+    margin-left: 1 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-wed {
+  .calendar__cell:nth-child(1) {
+    margin-left: 2 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-thu {
+  .calendar__cell:nth-child(1) {
+    margin-left: 3 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-fri {
+  .calendar__cell:nth-child(1) {
+    margin-left: 4 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-sat {
+  .calendar__cell:nth-child(1) {
+    margin-left: 5 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-sun {
+  .calendar__cell:nth-child(1) {
+    margin-left: 6 * ($cell-size + $cell-gap);
+  }
+}
+
+.calendar-28 {
+  .calendar__cell:nth-child(29),
+  .calendar__cell:nth-child(30),
+  .calendar__cell:nth-child(31) {
+    display: none;
+  }
+}
+
+.calendar-29 {
+  .calendar__cell:nth-child(30),
+  .calendar__cell:nth-child(31) {
+    display: none;
+  }
+}
+
+.calendar-30 {
+  .calendar__cell:nth-child(31) {
+    display: none;
+  }
+}
+
+.calendar-31 {
+  .calendar__cell:nth-child(n) {
+    display: inline-block;
+  }
 }
