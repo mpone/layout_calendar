@@ -1,0 +1,6 @@
+$base-font-size: 30px;
+$cell-size: 100px;
+$cell-gap: 1px;
+$callendar-width: $cell-gap + 7 * ($cell-size + $cell-gap);
+$cell-color: #eee;
+$cell-hover-color: #ffc0cb;

@@ -1,9 +1,4 @@
-$base-font-size: 30px;
-$cell-size: 100px;
-$cell-gap: 1px;
-$callenar-width: $cell-gap + 7 * ($cell-size + $cell-gap);
-$cell-color: #eee;
-$cell-hover-color: #ffc0cb;
+@import "variables";
 
 * {
   box-sizing: border-box;
@@ -28,7 +23,7 @@ body {
 .calendar {
   display: inherit;
   flex-flow: row wrap;
-  width: $callenar-width;
+  width: $callendar-width;
   padding-left: $cell-gap;
 
   &__cell {
@@ -59,50 +54,26 @@ body {
 
   @for $i from 1 through 31 {
     &__cell:nth-child(#{$i})::after {
-      content: "#{$i * 1}";
+      content: "#{$i}";
     }
   }
 }
 
-.calendar-mon {
-  .calendar__cell:nth-child(1) {
-    margin-left: 0;
-  }
-}
+$week-days: (
+  "mon" : 0,
+  "tue" : 1,
+  "wed" : 2,
+  "thu" : 3,
+  "fri" : 4,
+  "sat" : 5,
+  "sun" : 6
+);
 
-.calendar-tue {
-  .calendar__cell:nth-child(1) {
-    margin-left: 1 * ($cell-size + $cell-gap);
-  }
-}
-
-.calendar-wed {
-  .calendar__cell:nth-child(1) {
-    margin-left: 2 * ($cell-size + $cell-gap);
-  }
-}
-
-.calendar-thu {
-  .calendar__cell:nth-child(1) {
-    margin-left: 3 * ($cell-size + $cell-gap);
-  }
-}
-
-.calendar-fri {
-  .calendar__cell:nth-child(1) {
-    margin-left: 4 * ($cell-size + $cell-gap);
-  }
-}
-
-.calendar-sat {
-  .calendar__cell:nth-child(1) {
-    margin-left: 5 * ($cell-size + $cell-gap);
-  }
-}
-
-.calendar-sun {
-  .calendar__cell:nth-child(1) {
-    margin-left: 6 * ($cell-size + $cell-gap);
+@each $week-day, $week-day-number in $week-days {
+  .calendar-#{$week-day} {
+    .calendar__cell:first-child {
+      margin-left: $week-day-number * ($cell-size + $cell-gap);
+    }
   }
 }
 
